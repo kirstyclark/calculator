@@ -1,0 +1,194 @@
+$dark-red: #C60021;
+$transparent-red: #F74545;
+$medium-red: #E00413;
+$bright-red: #FB0203;
+$highlight: #EAF2EF;
+
+
+* {
+    font-family: 'Space Mono', monospace;
+    color: $highlight;
+    margin-block-end: 0;
+    margin-block-start: 0;
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    // background-color: $dark-red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#background {
+
+    background-image:
+        linear-gradient(45deg, $dark-red 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, $dark-red 75%),
+        linear-gradient(45deg, transparent 75%, $dark-red 75%),
+        linear-gradient(45deg, $dark-red 25%, $bright-red 25%);
+
+    background-size: 100px 100px;
+    background-position: 0 0, 0 0, -50px -50px, 50px 50px;
+
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+
+}
+
+main {
+    z-index: 3;
+    border-radius: 2%;
+    height: 640px;
+    width: 360px;
+    background-color: $medium-red;
+    box-shadow: 0 0 50px 20px $dark-red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .screen {
+        width: 85%;
+        height: 30%;
+        border-radius: 2%;
+        background-color: $bright-red;
+        color: $highlight;
+        box-shadow: 0 0 5px 1px $dark-red;
+        text-align: end;
+        padding: 10px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+        // input {
+        //     border: 0;
+        //     width: 85%;
+        //     height: 100%;
+        //     border-radius: 2%;
+        //     background-color: $bright-red;
+        //     box-shadow: 0 0 5px 1px $dark-red;
+        //     text-align: end;
+        // }
+
+        // input:hover {
+        //     cursor: default;
+        //     user-select: none;
+        // }
+    }
+
+    .keypad {
+        width: 85%;
+        height: 60%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 15px;
+
+        #equals {
+            grid-column-end: span 2;
+        }
+
+        button {
+            border: 0;
+            border-radius: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 5px 1px $dark-red;
+            color: $highlight;
+            box-shadow: 0 5px 5px 1px $dark-red;
+        }
+
+        #ac,
+        #equals {
+            background-color: $dark-red;
+        }
+
+        .digit {
+            background-color: $medium-red;
+        }
+
+        .operator,
+        #ans {
+            background-color: $bright-red;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        button:active {
+            background-color: $dark-red;
+            transform: translateY(4px);
+            border: 0;
+        }
+    }
+}
+
+// @mixin dots($count) {
+//     $text-shadow: ();
+
+//     @for $i from 0 through $count {
+//         $text-shadow: $text-shadow,
+//             (-.5+(random()) * 3) + em (-.5+(random()) * 3) + em 7px hsla(random() * 360, 100%, 50%, 1);
+//     }
+
+//     text-shadow: $text-shadow;
+// }
+
+// head::before,
+// head::after,
+// body::before,
+// body::after {
+//     position: fixed;
+//     top: 50%;
+//     left: 50%;
+//     width: 3em;
+//     height: 3em;
+//     content: '.';
+//     mix-blend-mode: screen;
+//     animation: 44s -27s move infinite ease-in-out alternate;
+// }
+
+
+// body::before {
+//     @include dots(60);
+//     animation-duration: 44s;
+//     animation-delay: -27s;
+// }
+
+// body::after {
+//     @include dots(50);
+//     animation-duration: 43s;
+//     animation-delay: -32s;
+// }
+
+// head::before {
+//     @include dots(60);
+//     animation-duration: 42s;
+//     animation-delay: -23s;
+// }
+
+// head::after {
+//     @include dots(50);
+//     animation-duration: 41s;
+//     animation-delay: -19s;
+// }
+
+// @keyframes move {
+//     from {
+//         transform: rotate(0deg) scale(12) translateX(-20px);
+//     }
+
+//     to {
+//         transform: rotate(360deg) scale(18) translateX(20px);
+//     }
+// }
