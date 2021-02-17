@@ -24,7 +24,27 @@ body {
     align-items: center;
 }
 
-#background {
+.background {
+
+    background-image:
+        linear-gradient(45deg, $bright-red 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, $bright-red 75%),
+        linear-gradient(45deg, transparent 75%, $bright-red 75%),
+        linear-gradient(45deg, $bright-red 25%, $dark-red 25%);
+
+    background-size: 100px 100px;
+    background-position: 0 0, 0 0, -50px -50px, 50px 50px;
+
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+
+}
+
+.background2 {
 
     background-image:
         linear-gradient(45deg, $dark-red 25%, transparent 25%),
@@ -68,21 +88,6 @@ main {
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
-
-        // input {
-        //     border: 0;
-        //     width: 85%;
-        //     height: 100%;
-        //     border-radius: 2%;
-        //     background-color: $bright-red;
-        //     box-shadow: 0 0 5px 1px $dark-red;
-        //     text-align: end;
-        // }
-
-        // input:hover {
-        //     cursor: default;
-        //     user-select: none;
-        // }
     }
 
     .keypad {

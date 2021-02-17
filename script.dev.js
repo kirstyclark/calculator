@@ -1,50 +1,59 @@
 "use strict";
 
-// const buttonClick = document.getElementById("keypad", clickButton);
-// let clickButton = (event) => {
-//   console.log("button click");
-// };
-// // const buttonClick = document.getElementById('keypad');
-// // keypad.addEventListener('click', (event) => {
-// //   const isButton = event.target.nodeName === 'BUTTON';
-// //   if (!isButton) {
-// //     return;
-// //   }
-// })
-// let lastButtonPressed = document
-//   .getElementById("keypad")
-//   .addEventListener("click");
-// if (lastButtonPressed == clickEquals) {
-// }
-var inputValue = document.getElementById("input__box");
+// Logging the last button pressed
+var lastButton;
+keypad.addEventListener("click", function (event) {
+  lastButton = event.target.className;
+}); // Background animation when a button is clicked
+
+var counter = 0;
+keypad.addEventListener("click", function (event) {
+  counter = counter + 1;
+
+  if (counter % 2 == 0) {
+    document.getElementById('background').classList.add('background2');
+    document.getElementById('background').classList.remove('background');
+  } else {
+    document.getElementById('background').classList.add('background');
+    document.getElementById('background').classList.remove('background2');
+  }
+}); //  AC button clearing keypad, 'lastButton' and past answers
 
 var clickAc = function clickAc(event) {
+  lastButton = "";
+  console.log(lastButton);
   inputValue.innerHTML = "";
-};
+}; // Click digit
 
-var answer; // const clickAns = (event) => {
-//   if (answer === undefined) {
-//     inputValue.value = inputValue.value;
-//   } else {
-//     //   if the last button pressed was a digit, start a new line
-//     //   if ()
-//     inputValue.value = inputValue.value + answer;
-//   }
-// };
 
 var numberValue = "";
 
 var clickDigit = function clickDigit(event) {
   numberValue = event.target.value;
   inputValue.innerHTML = inputValue.innerHTML + numberValue;
-};
+}; // Click operator
+
 
 var operatorValue = "";
 
 var clickOperator = function clickOperator(event) {
   operatorValue = event.target.value;
-  inputValue.innerHTML = inputValue.innerHTML + operatorValue;
-};
+
+  if (lastButton == 'digit') {
+    inputValue.innerHTML = inputValue.innerHTML + operatorValue;
+  } else if (lastButton == 'ans') {
+    inputValue.innerHTML = inputValue.innerHTML + operatorValue;
+  } else if (lastButton == 'equals') {
+    inputValue.innerHTML = inputValue.innerHTML + operatorValue;
+  } else {
+    inputValue.innerHTML = inputValue.innerHTML;
+  }
+
+  ;
+}; // Click 'equals' button
+
+
+var answer;
 
 var clickEquals = function clickEquals() {
   var digitArr = inputValue.innerHTML.split(operatorValue);
@@ -79,51 +88,26 @@ var clickEquals = function clickEquals() {
   if (answer === numberValue) {
     inputValue.innerHTML = answer;
   } else {
-    inputValue.innerHTML = equation + "<br/>" + answer + "=";
+    inputValue.innerHTML = equation + "<br/>" + answer;
   }
-}; // const inputArr = inputValue.value.split('');
-// const operatorsArr = ['*', '/', '-', '+'];
-// // // 4. We need a check somewhere for NO Operators and stop this calculation in it's tracks
-// for (let index=0; index < operatorsArr.length; index++) {
-//     if (inputArr.includes(operatorsArr[index])) {
-//         return equation();
-//     } else {
-//         return inputValue;
-//     }
-// }
-// const equation = (inputArr, operatorsArr) => {
-// }
-// operators.forEach(operator => {
-// })
-// operators.forEach(operator => {
-//     // 5. Go through each operator... Start with * as it has priority
-//     console.log("THE OPERATOR WE@RE LOOKING AT IS " + operator);
-//     equaiton.forEach(character => {
-//         console.log(character);
-//         // 1. If it's the operator we're looking && it's not a number
-//         //      - store the number BEFORE the operator
-//         //      - store the number AFTER the operator
-//         //      - Do a switchcase and calculate the value
-//         //      - Store as the calculation SO FAR! then start again and look for next most important
-//     })
-// })
-// inputValue, numberValue, operatorValue, event
-//         7. Store the value in a variable
-//         3. Keep a note of the operator which was clicked
-//         4. OPTION #1 - change the function which is run when the = is clicked
-//                        (e.g. We click "+" this means the "=" needs to run a doAddition(param1,param2))
-//         ... HOPE the user puts in another number (e.g. 3)
-//         1. Onclick of the button
-//         2. add the number to the input box
-//         3. IF the input already has a value -> append it to the end of the current value
-//         ... equals button
-//         1. Function for the equal button is clicked
-//         2. Calculate the result
-//         3. Get the first parameter , get the operator, get the second parameter
-//         4. OPTION #2 - Use a switchcase on the operator to decide how to calculate the result
-//         5. Show this result to the user
-//         6. Return/Show it on the screen -> .innerHTML = <theresult>;
-//     --></theresult>
+}; // Click 'ans' button
+
+
+var clickAns = function clickAns(event) {
+  if (answer == "") {
+    inputValue.innerHTML = inputValue.innerHTML;
+  } else {
+    if (lastButton == 'operator') {
+      inputValue.innerHTML = inputValue.innerHTML + answer;
+    } else if (lastButton == 'equals') {
+      inputValue.innerHTML = inputValue.innerHTML;
+    } else if (lastButton == 'ac') {
+      inputValue.innerHTML = "";
+    } else {
+      inputValue.innerHTML = inputValue.innerHTML;
+    }
+  }
+}; // Digit clicks
 
 
 var oneClick = document.getElementById("one").addEventListener("click", clickDigit);
@@ -136,14 +120,17 @@ var sevenClick = document.getElementById("seven").addEventListener("click", clic
 var eightClick = document.getElementById("eight").addEventListener("click", clickDigit);
 var nineClick = document.getElementById("nine").addEventListener("click", clickDigit);
 var zeroClick = document.getElementById("zero").addEventListener("click", clickDigit);
-var pointClick = document.getElementById("point").addEventListener("click", clickDigit);
+var pointClick = document.getElementById("point").addEventListener("click", clickDigit); // Operator clicks
+
 var percentClick = document.getElementById("percentage").addEventListener("click", clickOperator);
 var divideClick = document.getElementById("divide").addEventListener("click", clickOperator);
 var multiplyClick = document.getElementById("multiply").addEventListener("click", clickOperator);
 var subtractClick = document.getElementById("subtract").addEventListener("click", clickOperator);
-var addClick = document.getElementById("add").addEventListener("click", clickOperator); // const ansClick = document
-//   .getElementById("ans")
-//   .addEventListener("click", clickAns);
+var addClick = document.getElementById("add").addEventListener("click", clickOperator); // Special clicks
 
+var ansClick = document.getElementById("ans").addEventListener("click", clickAns);
 var acClick = document.getElementById("ac").addEventListener("click", clickAc);
-var equalClick = document.getElementById("equals").addEventListener("click", clickEquals);
+var equalClick = document.getElementById("equals").addEventListener("click", clickEquals); // General tracking
+
+var buttonClick = document.getElementById("keypad");
+var inputValue = document.getElementById("input__box");

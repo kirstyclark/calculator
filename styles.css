@@ -16,7 +16,19 @@ body {
   align-items: center;
 }
 
-#background {
+.background {
+  background-image: linear-gradient(45deg, #FB0203 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #FB0203 75%), linear-gradient(45deg, transparent 75%, #FB0203 75%), linear-gradient(45deg, #FB0203 25%, #C60021 25%);
+  background-size: 100px 100px;
+  background-position: 0 0, 0 0, -50px -50px, 50px 50px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+}
+
+.background2 {
   background-image: linear-gradient(45deg, #C60021 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #C60021 75%), linear-gradient(45deg, transparent 75%, #C60021 75%), linear-gradient(45deg, #C60021 25%, #FB0203 25%);
   background-size: 100px 100px;
   background-position: 0 0, 0 0, -50px -50px, 50px 50px;
