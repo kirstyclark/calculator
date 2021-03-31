@@ -53,6 +53,7 @@ main {
   align-items: center;
 }
 main .screen {
+  overflow: hidden;
   width: 85%;
   height: 30%;
   border-radius: 2%;

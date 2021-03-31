@@ -27,7 +27,6 @@ keypad.addEventListener("click", (event) => {
 //  AC button clearing keypad, 'lastButton' and past answers
 const clickAc = (event) => {
   lastButton = "";
-  console.log(lastButton);
   inputValue.innerHTML = "";
 };
 
@@ -37,9 +36,18 @@ let numberValue = "";
 
 const clickDigit = (event) => {
   numberValue = event.target.value;
-  inputValue.innerHTML = inputValue.innerHTML + numberValue;
+  if (lastButton == 'digit') {
+    inputValue.innerHTML = inputValue.innerHTML + numberValue;
+  } else if (lastButton == 'operator') {
+    inputValue.innerHTML = inputValue.innerHTML + numberValue;
+  } else if (lastButton == 'ac') {
+    inputValue.innerHTML = inputValue.innerHTML + numberValue;
+  } else if (lastButton == null) {
+    inputValue.innerHTML = inputValue.innerHTML + numberValue;
+  } else {
+    inputValue.innerHTML = inputValue.innerHTML;
+  } 
 };
-
 
 // Click operator
 let operatorValue = "";
@@ -60,35 +68,54 @@ const clickOperator = (event) => {
 
 // Click 'equals' button
 const clickEquals = () => {
-  const digitArr = inputValue.innerHTML.split(operatorValue);
-
-  const equation = digitArr.join(operatorValue);
-
-  switch (operatorValue) {
-    case "+":
-      answer = parseFloat(digitArr[0]) + parseFloat(digitArr[1]);
-      break;
-    case "-":
-      answer = parseFloat(digitArr[0]) - parseFloat(digitArr[1]);
-      break;
-    case "*":
-      answer = parseFloat(digitArr[0]) * parseFloat(digitArr[1]);
-      break;
-    case "/":
-      answer = parseFloat(digitArr[0]) / parseFloat(digitArr[1]);
-      break;
-    case "%":
-      answer = parseFloat(digitArr[0]) / 100;
-      break;
-    default:
-      answer = numberValue;
-      break;
-  }
-
-  if (answer === numberValue) {
-    inputValue.innerHTML = answer;
+  if (lastButton == 'operator') {
+    null
+  } else if (lastButton == 'ac') {
+    null
+  } else if (lastButton == 'equals') {
+    null
+  } else if (lastButton == '') {
+    null
   } else {
-    inputValue.innerHTML = equation + "<br/>" + answer;
+    let currentArr = inputValue.innerHTML.split('<br>');
+    let currentLine = currentArr[currentArr.length-1];
+
+    const digitArr = currentLine.split(operatorValue);
+
+    // const equation = digitArr.join(operatorValue);
+
+    switch (operatorValue) {
+      case "+":
+        answer = parseFloat(digitArr[0]) + parseFloat(digitArr[1]);
+        break;
+      case "-":
+        answer = parseFloat(digitArr[0]) - parseFloat(digitArr[1]);
+        break;
+      case "*":
+        answer = parseFloat(digitArr[0]) * parseFloat(digitArr[1]);
+        break;
+      case "/":
+        answer = parseFloat(digitArr[0]) / parseFloat(digitArr[1]);
+        break;
+      case "%":
+        answer = parseFloat(digitArr[0]) / 100;
+        break;
+      default:
+        answer = numberValue;
+        break;
+    }
+
+    if (answer == Math.floor(answer)) {
+      answer = answer;
+    } else {
+      answer = answer.toFixed(3);
+    };
+
+    if (answer === numberValue) {
+      inputValue.innerHTML = answer;
+    } else {
+      inputValue.innerHTML = inputValue.innerHTML + "<br/>" + answer;
+    }
   }
 };
 
