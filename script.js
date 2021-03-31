@@ -1,5 +1,6 @@
 // Logging the last button pressed
 let lastButton;
+let answer;
 
 keypad.addEventListener("click", (event) => {
   lastButton = event.target.className;
@@ -58,8 +59,6 @@ const clickOperator = (event) => {
 
 
 // Click 'equals' button
-let answer;
-
 const clickEquals = () => {
   const digitArr = inputValue.innerHTML.split(operatorValue);
 

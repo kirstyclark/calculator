@@ -2,6 +2,7 @@
 
 // Logging the last button pressed
 var lastButton;
+var answer;
 keypad.addEventListener("click", function (event) {
   lastButton = event.target.className;
 }); // Background animation when a button is clicked
@@ -52,8 +53,6 @@ var clickOperator = function clickOperator(event) {
   ;
 }; // Click 'equals' button
 
-
-var answer;
 
 var clickEquals = function clickEquals() {
   var digitArr = inputValue.innerHTML.split(operatorValue);
